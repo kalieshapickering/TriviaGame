@@ -1,0 +1,13 @@
+body{
+    background-color: orange;
+}
+.game{
+background-color: blue;
+height: 800px;
+margin-left: 20%;
+top: 20px;
+border-radius: 15%;
+}
+.jumbotron{
+    margin-top: 7.5em;
+}
