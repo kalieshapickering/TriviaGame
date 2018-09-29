@@ -91,10 +91,15 @@ for (var i=0; i<this.triviaQuestions[question].length; i++){
 },
      renderQuestion: function () {
     $('.question-view').empty();
+    $('.display-view').empty();
                var $questionDiv = $("<div>");
+               var $pictureDiv = $("<div>");
                var question = this.triviaQuestions[questionNumber].q;
+               var picture = this.triviaQuestions[questionNumber].image;
                 $questionDiv.append(question);
+                $pictureDiv.append("<img src=" + picture + "/>");
                 $(".question-view").append($questionDiv);
+                $(".display-view").append($pictureDiv);
                 console.log(this.triviaQuestions[questionNumber].q);
            //  }
             this.renderButton();
