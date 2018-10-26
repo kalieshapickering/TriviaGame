@@ -4,7 +4,7 @@ var $optionThree = $(".optionThree");
 var optionFour = $(".optionFour");
 var $playBtn = $(".playBtn");
 var $score = $('.score');
-var $timer = $('.timer');
+var timer = $('.timer');
 var $question = $('#question');
 var $firstBtn = $('.first-btn');
 var $secondBtn = $('.second-btn');
@@ -31,7 +31,7 @@ var game = {
         },
         {
             q: "What is the name of Bart's favorite comic book action hero?",
-            image: "assets/images/simpsons.jpg",
+            image: "assets/images/simpsonsmeme.jpg",
             o: ["Radiation Dude", "Mezmorino", "Radioactive Man", "The Annihilator"],
             a: "Radioactive Man"
         },
@@ -92,17 +92,21 @@ for (var i=0; i<this.triviaQuestions[question].length; i++){
      renderQuestion: function () {
     $('.question-view').empty();
     $('.display-view').empty();
+    $("#timer").empty();
                var $questionDiv = $("<div>");
                var $pictureDiv = $("<div>");
                var question = this.triviaQuestions[questionNumber].q;
                var picture = this.triviaQuestions[questionNumber].image;
                 $questionDiv.append(question);
-                $pictureDiv.append("<img src=" + picture + "/>");
+                $pictureDiv.append("<img class ='images' src=" + picture + ">");
+
                 $(".question-view").append($questionDiv);
                 $(".display-view").append($pictureDiv);
                 console.log(this.triviaQuestions[questionNumber].q);
+
            //  }
             this.renderButton();
+            runTimer();
        // }
     },
 
@@ -141,6 +145,7 @@ for (var i=0; i<this.triviaQuestions[question].length; i++){
  }
         else{
        console.log("WRONG");
+       alert("WRONG!");
         } 
       // this.checkWinner();
       questionNumber ++;
@@ -150,6 +155,32 @@ for (var i=0; i<this.triviaQuestions[question].length; i++){
     checkWinner: function () {}
 
 
+}
+// Timer function
+function runTimer() {
+    clearInterval(timer);
+    clearInterval(forwarder);
+    timeLeft = 30;
+    timer = setInterval(decrement, 1000);
+}
+
+// Stop Timer Function
+function stopTimer() {
+    clearInterval(timer);
+    $("#time").html("");
+}
+
+// Decrement time left
+function decrement() {
+    timeLeft--;
+    $("#time").html(timeLeft + " seconds left")
+    if (timeLeft == 0) {
+        // if time runs out stop timer and lose game
+        stopTimer();
+        $("#time").html("Time is up!");
+        $("#message").html("You Lose");
+        $(".question-view").html("Oh shoot! You ran out of time!");
+    };
 }
 
 
@@ -166,6 +197,7 @@ $(document).ready(function () {
 
     $playBtn.on('click', function(){
         game.setUp();
+        runTimer();
     });
     
 });

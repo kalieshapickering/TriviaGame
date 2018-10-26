@@ -11,3 +11,7 @@ border-radius: 15%;
 .jumbotron{
     margin-top: 7.5em;
 }
+.images{
+    width: 350px;
+    margin-left: 10%;
+}
